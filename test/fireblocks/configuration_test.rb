@@ -8,9 +8,6 @@ class FireblocksConfiguration < Minitest::Test
 
     describe 'with configuration block' do
       before do
-        # To get unique jwt headers for fast requests, add a sleep
-        sleep(1)
-
         Fireblocks.configure do |config|
           config.api_key = ENV['FIREBLOCKS_API_KEY']
           config.private_key = ENV['FIREBLOCKS_PRIVATE_KEY']

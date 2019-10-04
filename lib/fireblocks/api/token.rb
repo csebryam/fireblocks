@@ -52,7 +52,7 @@ module Fireblocks
     end
 
     def nonce
-      Time.now.to_i * 1000
+      "#{Time.now.to_i}#{Time.now.nsec}".to_i
     end
 
     def rsa_private

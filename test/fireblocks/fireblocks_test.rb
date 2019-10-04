@@ -8,9 +8,6 @@ class FireblocksAPI < Minitest::Test
       let(:vault_name) { 'test_vault' }
 
       before do
-        # To get unique jwt headers for fast requests, add a sleep
-        sleep(1)
-
         Fireblocks.reset
         Fireblocks.configure do |config|
           config.api_key = ENV['FIREBLOCKS_API_KEY']
@@ -25,7 +22,8 @@ class FireblocksAPI < Minitest::Test
 
       def test_get_vault_accounts
         Fireblocks::API.create_vault_account(name: vault_name)
-        sleep(1)
+        # Difficulty with parallel requests, add a sleep
+        sleep(2)
         vault_accounts = Fireblocks::API.get_vault_accounts
         refute_empty vault_accounts
       end
