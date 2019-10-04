@@ -1,0 +1,10 @@
+ClassAndModuleChildren:
+  Exclude:
+  - 'test/**/*.rb'
+Documentation:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - 'test/**/*.rb'
+Naming/AccessorMethodName:
+  Enabled: false
