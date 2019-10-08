@@ -31,14 +31,14 @@ module Fireblocks
         Request.post(path: "/v1/vault/accounts/#{vault_account_id}/#{asset_id}")
       end
 
-      def create_deposit_address(vault_account_id, asset_id, description:)
+      def create_deposit_address(vault_account_id, asset_id, description: nil)
         Request.post(
           body: { description: description },
           path: "/v1/vault/accounts/#{vault_account_id}/#{asset_id}/addresses"
         )
       end
 
-      def get_deposit_addressess(vault_account_id, asset_id)
+      def get_deposit_addresses(vault_account_id, asset_id)
         Request.get(
           path: "/v1/vault/accounts/#{vault_account_id}/#{asset_id}/addresses"
         )
