@@ -6,14 +6,14 @@ The Ruby gem wrapper for Fireblocks! This gem is actively being developed. **Be 
 
 To install, type:
 
-```
+```ruby
 gem install fireblocks
 ```
 
 Add to your `Gemfile`:
 
 ```ruby
-gem "fireblocks", "~> 0.1.0"
+gem "fireblocks", "~> 0.2.0"
 ```
 
 Run `bundle install`
@@ -39,7 +39,7 @@ end
 
 Available methods can be found in `Fireblocks::API`
 
-```
+```ruby
 # To create a vault account
 Fireblocks::API.create_vault_account(name: 'test_name')
 
