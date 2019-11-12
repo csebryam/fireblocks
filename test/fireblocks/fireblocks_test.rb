@@ -22,8 +22,6 @@ class FireblocksAPI < Minitest::Test
 
       def test_get_vault_accounts
         Fireblocks::API.create_vault_account(name: vault_name)
-        # Difficulty with parallel requests, add a sleep
-        sleep(2)
         vault_accounts = Fireblocks::API.get_vault_accounts
         refute_empty vault_accounts
       end
