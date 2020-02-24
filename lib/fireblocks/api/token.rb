@@ -25,7 +25,7 @@ module Fireblocks
     end
 
     def expire_at
-      Time.now.to_i + 20
+      Time.now.to_i + 55
     end
 
     def call

@@ -5,6 +5,7 @@ require 'fireblocks/configuration'
 require 'fireblocks/api/api'
 require 'fireblocks/api/request'
 require 'fireblocks/api/token'
+require 'fireblocks/api/transactions'
 
 # Parent module for all classes
 module Fireblocks
