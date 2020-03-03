@@ -20,7 +20,19 @@ module Fireblocks
           Fireblocks::Request.post(body: body, path: '/v1/transactions')
         end
 
-        def from_vault_to_external(amount:, asset_id:, source_id:, destination_id:, one_time_address:)
+        def from_vault_to_external(
+          amount:,
+          asset_id:,
+          source_id:,
+          destination_id:,
+          one_time_address:,
+          tag: nil
+        )
+          one_time_address_hash = {
+            address: one_time_address
+          }
+          one_time_address_hash.merge(tag: tag) if tag
+
           body = {
             amount: amount,
             assetId: asset_id,
@@ -31,9 +43,7 @@ module Fireblocks
             destination: {
               type: 'EXTERNAL_WALLET',
               id: destination_id,
-              oneTimeAddress: {
-                address: one_time_address
-              }
+              oneTimeAddress: one_time_address_hash
             }
           }
           create(body)
