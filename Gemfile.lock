@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fireblocks (0.1.0)
+    fireblocks (0.2.4)
       jwt (~> 2.2)
 
 GEM
@@ -11,7 +11,7 @@ GEM
     byebug (11.0.1)
     coderay (1.1.2)
     jaro_winkler (1.5.3)
-    jwt (2.2.1)
+    jwt (2.2.2)
     method_source (0.9.2)
     minitest (5.12.2)
     parallel (1.17.0)
@@ -47,4 +47,4 @@ DEPENDENCIES
   rubocop (~> 0.56)
 
 BUNDLED WITH
-   1.17.2
+   1.17.3

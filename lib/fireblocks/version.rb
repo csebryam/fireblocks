@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
 module Fireblocks
-  VERSION = '0.2.3'
+  MAJOR = 0
+  MINOR = 2
+  TINY = 4
+  VERSION = [MAJOR, MINOR, TINY].join(".").freeze
 end

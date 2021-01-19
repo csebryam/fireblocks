@@ -1,0 +1,19 @@
+name: Publish Gem
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build and publish gem
+      uses: jstastny/publish-gem-to-github@v1.0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        owner: fundamerica
