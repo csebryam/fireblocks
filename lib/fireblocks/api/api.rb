@@ -16,9 +16,10 @@ module Fireblocks
         Request.get(path: "/v1/vault/accounts/#{id}")
       end
 
-      def update_vault_account(vault_account_id, name:)
+      def update_vault_account(vault_account_id, name:, request_on_ui: nil)
+        body = { name: name, requestOnUi: request_on_ui }.compact
         Request.put(
-          body: { name: name },
+          body: body,
           path: "/v1/vault/accounts/#{vault_account_id}"
         )
       end

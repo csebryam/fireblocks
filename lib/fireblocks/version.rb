@@ -3,6 +3,6 @@
 module Fireblocks
   MAJOR = 0
   MINOR = 2
-  TINY = 4
-  VERSION = [MAJOR, MINOR, TINY].join(".").freeze
+  TINY = 5
+  VERSION = [MAJOR, MINOR, TINY].join('.').freeze
 end

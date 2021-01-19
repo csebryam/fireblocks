@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fireblocks (0.2.4)
+    fireblocks (0.2.5)
       jwt (~> 2.2)
 
 GEM
@@ -39,7 +39,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.17)
+  bundler (~> 2.1)
   fireblocks!
   minitest (~> 5.0)
   pry-byebug
@@ -47,4 +47,4 @@ DEPENDENCIES
   rubocop (~> 0.56)
 
 BUNDLED WITH
-   1.17.3
+   2.1.1

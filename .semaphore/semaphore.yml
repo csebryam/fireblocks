@@ -1,0 +1,29 @@
+version: v1.0
+name: fireblocks
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Setup
+    task:
+      jobs:
+        - name: Install dependencies
+          commands:
+            - checkout
+            - cache restore
+            - sem-version ruby 2.5.7
+            - bundle install -j 4 --path vendor/bundle
+            - cache store
+  - name: Run Rubocop
+    task:
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+          - sem-version ruby 2.5.7
+          - bundle install --path vendor/bundle
+      jobs:
+        - name: Run Rubocop
+          commands:
+            - bundle exec rubocop

@@ -8,3 +8,7 @@ Metrics/BlockLength:
     - 'test/**/*.rb'
 Naming/AccessorMethodName:
   Enabled: false
+Metrics/MethodLength:
+  Max: 30
+Metrics/ParameterLists:
+  CountKeywordArgs: false

@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 module Fireblocks
   class API
     class Transactions
       class << self
-        VALID_TRANSACTION_KEYS = [
-            :amount,
-            :assetId,
-            :source,
-            :destination,
-            :fee,
-            :gasPrice,
-            :note,
-            :autoStaking,
-            :networkStaking,
-            :cpuStaking
-        ]
+        VALID_TRANSACTION_KEYS = %i[
+          amount
+          assetId
+          source
+          destination
+          fee
+          gasPrice
+          note
+          autoStaking
+          networkStaking
+          cpuStaking
+        ].freeze
 
         def create(options)
           body = options.slice(*VALID_TRANSACTION_KEYS)
