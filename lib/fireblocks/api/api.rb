@@ -8,20 +8,28 @@ module Fireblocks
         Request.get(path: '/v1/vault/accounts')
       end
 
-      def create_vault_account(name:)
-        Request.post(body: { name: name }, path: '/v1/vault/accounts')
+      def create_vault_account(name:, hidden_on_ui: false, auto_fuel: false)
+        body = { name: name, hiddenOnUI: hidden_on_ui, autoFuel: auto_fuel }
+        Request.post(body: body, path: '/v1/vault/accounts')
       end
 
       def get_vault_account(id)
         Request.get(path: "/v1/vault/accounts/#{id}")
       end
 
-      def update_vault_account(vault_account_id, name:, request_on_ui: nil)
-        body = { name: name, requestOnUi: request_on_ui }.compact
+      def update_vault_account(vault_account_id, name:)
         Request.put(
-          body: body,
+          body: { name: name },
           path: "/v1/vault/accounts/#{vault_account_id}"
         )
+      end
+
+      def hide_vault_account(id)
+        Request.post(path: "/v1/vault/accounts/#{id}/hide")
+      end
+
+      def unhide_vault_account(id)
+        Request.post(path: "/v1/vault/accounts/#{id}/unhide")
       end
 
       def get_vault_account_asset(vault_account_id, asset_id)

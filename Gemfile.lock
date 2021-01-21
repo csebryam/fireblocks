@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fireblocks (0.2.5)
+    fireblocks (0.2.6)
       jwt (~> 2.2)
 
 GEM
