@@ -31,7 +31,7 @@ module Fireblocks
       req = Net::HTTP::Get.new(uri)
       request_headers(body).each { |rk, rv| req[rk] = rv }
 
-      valid_response!(send_request(req))
+      valid_response!(send_request(req), request: req)
     end
 
     def put(body)
@@ -39,7 +39,7 @@ module Fireblocks
       request_headers(body).each { |rk, rv| req[rk] = rv }
       req.body = body.to_json
 
-      valid_response!(send_request(req))
+      valid_response!(send_request(req), request: req)
     end
 
     def post(body)
@@ -47,7 +47,7 @@ module Fireblocks
       request_headers(body).each { |rk, rv| req[rk] = rv }
       req.body = body.to_json
 
-      valid_response!(send_request(req))
+      valid_response!(send_request(req), request: req)
     end
 
     private
@@ -70,11 +70,20 @@ module Fireblocks
       Token.call(body, uri)
     end
 
-    def valid_response!(req_response)
+    def valid_response!(req_response, request:)
       resp = JSON.parse(req_response.body)
       return resp if %w[OK Created].include?(req_response.message)
 
-      raise Error, code: req_response.code, message: req_response.message
+      err_details = {
+        code: req_response.code,
+        message: req_response.message,
+        response_body: req_response.body,
+        method: request.method,
+        path: request.path,
+        request_body: request.body
+      }
+
+      raise Error, err_details
     end
   end
 end

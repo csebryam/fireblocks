@@ -53,6 +53,13 @@ module Fireblocks
         )
       end
 
+      def update_description_deposit_address(vault_account_id, asset_id, address_id, description:)
+        Request.put(
+          body: { description: description },
+          path: "/v1/vault/accounts/#{vault_account_id}/#{asset_id}/addresses/#{address_id}"
+        )
+      end
+
       def get_internal_wallet(wallet_id)
         Request.get(path: "/v1/internal_wallets/#{wallet_id}")
       end
