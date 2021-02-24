@@ -50,6 +50,27 @@ module Fireblocks
           }
           create(body)
         end
+
+        def from_vault_to_vault(
+          amount:,
+          asset_id:,
+          source_id:,
+          destination_id:
+        )
+          body = {
+            amount: amount,
+            assetId: asset_id,
+            source: {
+              type: 'VAULT_ACCOUNT',
+              id: source_id
+            },
+            destination: {
+              type: 'VAULT_ACCOUNT',
+              id: destination_id
+            }
+          }
+          create(body)
+        end
       end
     end
   end
