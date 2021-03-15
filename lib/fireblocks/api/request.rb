@@ -5,7 +5,6 @@ require 'net/http'
 module Fireblocks
   # Interface to GET, POST, PUT
   class Request
-    Error = Class.new(StandardError)
     class << self
       def get(path:, body: '')
         new(path: path).get(body)
@@ -83,7 +82,20 @@ module Fireblocks
         request_body: request.body
       }
 
-      raise Error, err_details
+      raise Error.new(err_details)
+    end
+
+    class Error < StandardError
+      attr_reader :error_details
+
+      def initialize(error_details)
+        @error_details = error_details
+        super(error_details)
+      end
+
+      def fireblocks_response_json
+        error_details[:response_body]
+      end
     end
   end
 end
