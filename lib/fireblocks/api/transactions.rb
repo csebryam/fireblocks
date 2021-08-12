@@ -10,6 +10,7 @@ module Fireblocks
           source
           destination
           fee
+          feeLevel
           gasPrice
           note
           autoStaking
@@ -28,7 +29,8 @@ module Fireblocks
           source_id:,
           destination_id:,
           one_time_address:,
-          tag: nil
+          tag: nil,
+          options: {}
         )
           one_time_address_hash = {
             address: one_time_address
@@ -47,7 +49,8 @@ module Fireblocks
               id: destination_id,
               oneTimeAddress: one_time_address_hash
             }
-          }
+          }.merge(options)
+
           create(body)
         end
 
@@ -55,7 +58,8 @@ module Fireblocks
           amount:,
           asset_id:,
           source_id:,
-          destination_id:
+          destination_id:,
+          options: {}
         )
           body = {
             amount: amount,
@@ -68,7 +72,8 @@ module Fireblocks
               type: 'VAULT_ACCOUNT',
               id: destination_id
             }
-          }
+          }.merge(options)
+
           create(body)
         end
       end
