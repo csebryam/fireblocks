@@ -4,11 +4,14 @@ module Fireblocks
   class API
     class Transactions
       class << self
+        EXTERNAL_WALLET = 'EXTERNAL_WALLET'
+        VAULT_ACCOUNT = 'VAULT_ACCOUNT'
         VALID_TRANSACTION_KEYS = %i[
           amount
           assetId
           source
           destination
+          destinations
           fee
           feeLevel
           gasPrice
@@ -27,29 +30,31 @@ module Fireblocks
           amount:,
           asset_id:,
           source_id:,
-          destination_id:,
-          one_time_address:,
+          destination: nil,
+          destinations: nil,
+          destination_id: nil,
+          one_time_address: nil,
           tag: nil,
           options: {}
         )
-          one_time_address_hash = {
-            address: one_time_address
-          }
-          one_time_address_hash.merge(tag: tag) if tag
+
+          destination_params = destination_payload(
+            destination_type: EXTERNAL_WALLET,
+            destination: destination,
+            destinations: destinations,
+            destination_id: destination_id,
+            one_time_address: one_time_address,
+            tag: tag
+          )
 
           body = {
             amount: amount,
             assetId: asset_id,
             source: {
-              type: 'VAULT_ACCOUNT',
+              type: VAULT_ACCOUNT,
               id: source_id
-            },
-            destination: {
-              type: 'EXTERNAL_WALLET',
-              id: destination_id,
-              oneTimeAddress: one_time_address_hash
             }
-          }.merge(options)
+          }.merge(options, destination_params).compact
 
           create(body)
         end
@@ -61,20 +66,37 @@ module Fireblocks
           destination_id:,
           options: {}
         )
+
           body = {
             amount: amount,
             assetId: asset_id,
             source: {
-              type: 'VAULT_ACCOUNT',
+              type: VAULT_ACCOUNT,
               id: source_id
             },
             destination: {
-              type: 'VAULT_ACCOUNT',
+              type: VAULT_ACCOUNT,
               id: destination_id
             }
-          }.merge(options)
+          }.merge(options).compact
 
           create(body)
+        end
+
+        def destination_payload(**kwargs)
+          return { destinations: kwargs[:destinations] } if kwargs[:destinations].is_a?(Array)
+          return { destination: kwargs[:destination] } if kwargs[:destination].is_a?(Hash)
+
+          {
+            destination: {
+              type: kwargs[:destination_type],
+              id: kwargs[:destination_id],
+              oneTimeAddress: {
+                address: kwargs[:one_time_address],
+                tag: kwargs[:tag]
+              }.compact
+            }.compact
+          }
         end
       end
     end
