@@ -7,9 +7,9 @@ module Fireblocks
   #
   class Configuration
     Error = Class.new(StandardError)
-    attr_writer :api_key, :private_key, :tenant_id
+    attr_writer :api_key, :private_key
 
-    attr_accessor :base_url
+    attr_accessor :base_url, :tenant_id
 
     def initialize
       @api_key = nil
