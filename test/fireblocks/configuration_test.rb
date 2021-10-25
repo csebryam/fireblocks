@@ -11,6 +11,7 @@ class FireblocksConfiguration < Minitest::Test
         Fireblocks.configure do |config|
           config.api_key = ENV['FIREBLOCKS_API_KEY']
           config.private_key = ENV['FIREBLOCKS_PRIVATE_KEY']
+          config.tenant_id = 'test'
         end
       end
 
@@ -22,6 +23,10 @@ class FireblocksConfiguration < Minitest::Test
         assert_equal(
           Fireblocks.configuration.private_key, ENV['FIREBLOCKS_PRIVATE_KEY']
         )
+      end
+
+      def test_it_returns_tenant_id
+        assert_equal(Fireblocks.configuration.tenant_id, 'test')
       end
 
       def test_it_resassigns_base_url

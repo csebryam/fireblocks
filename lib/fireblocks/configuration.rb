@@ -7,12 +7,14 @@ module Fireblocks
   #
   class Configuration
     Error = Class.new(StandardError)
-    attr_writer :api_key, :private_key
+    attr_writer :api_key, :private_key, :tenant_id
+
     attr_accessor :base_url
 
     def initialize
       @api_key = nil
       @private_key = nil
+      @tenant_id = nil
       @base_url = 'https://api.fireblocks.io'
     end
 
