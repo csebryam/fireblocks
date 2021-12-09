@@ -24,3 +24,4 @@ module Fireblocks
     @configuration = Configuration.new
   end
 end
+

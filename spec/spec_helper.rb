@@ -20,6 +20,14 @@ Bundler.setup
 require 'pry'
 require 'fireblocks'
 
+require 'dotenv'
+Dotenv.load('config/application.yml')
+
+Fireblocks.configure do |config|
+  config.api_key = ENV['FIREBLOCKS_API_KEY']
+  config.private_key = ENV['FIREBLOCKS_PRIVATE_KEY']
+end
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -105,3 +113,13 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+require 'webmock'
+require 'vcr'
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'spec/cassettes'
+  config.hook_into :webmock
+  config.configure_rspec_metadata!
+end
+
