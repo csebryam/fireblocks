@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
 
   spec.name          = 'fireblocks'
   spec.version       = Fireblocks::VERSION
-  spec.authors       = ['Kim Long']
-  spec.email         = ['kimrlong09@gmail.com']
+  spec.authors       = ['Bryam Noguera', 'Matt Culpepper', 'Jeremy Winterberg', 'Kim Long']
+  spec.email         = ['bryamnoguera@yahoo.com']
 
   spec.summary       = 'Ruby wrapper for Fireblocks API'
   spec.homepage      = 'https://github.com/csebryam/fireblocks'
