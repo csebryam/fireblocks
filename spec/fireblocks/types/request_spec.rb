@@ -1,12 +1,15 @@
 describe ::Fireblocks::Types::Request do
-  class FunkyType < ::Fireblocks::Types::Request
-    property :camelized_name
+  class SimpleRequest < ::Fireblocks::Types::Request
+    property :single
+    property :double_word
   end
 
   context "when serializing" do
+    subject { SimpleRequest.new(single: 'value', double_word: 'two words').to_h }
+
     it "should camelize keys" do
       binding.pry
-      expect(FunkyType.new(camelized_name: 'a value').to_camel_keys).to eq('camelizedName' => 'a value')
+      expect(subject).to match(a_hash_including(doubleWord: 'two words'))
     end
   end
 end
