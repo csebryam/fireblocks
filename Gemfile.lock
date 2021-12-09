@@ -2,21 +2,23 @@ PATH
   remote: .
   specs:
     fireblocks (0.2.13)
-      jwt (~> 2.2)
+      jwt
+      smart_properties
 
 GEM
   remote: https://rubygems.org/
   specs:
     jwt (2.3.0)
     rake (13.0.1)
+    smart_properties (1.16.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 2.2)
+  bundler
   fireblocks!
-  rake (~> 13.0)
+  rake
 
 BUNDLED WITH
    2.2.17

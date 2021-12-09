@@ -20,8 +20,9 @@ Gem::Specification.new do |spec|
   spec.files = Dir['lib/**/*.rb', 'LICENSE.txt', 'README.md']
   spec.test_files = Dir['test/**/*.rb']
 
-  spec.add_runtime_dependency 'jwt', '~> 2.2'
+  spec.add_runtime_dependency 'jwt'
+  spec.add_runtime_dependency 'smart_properties'
 
-  spec.add_development_dependency 'bundler', '~> 2.2'
-  spec.add_development_dependency 'rake', '~> 13.0'
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'rake'
 end

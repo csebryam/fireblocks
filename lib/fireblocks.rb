@@ -2,24 +2,23 @@
 
 require 'fireblocks/version'
 require 'fireblocks/configuration'
+require 'fireblocks/type'
+require 'fireblocks/types/vault/create_vault_asset_response'
 require 'fireblocks/api/api'
 require 'fireblocks/api/request'
 require 'fireblocks/api/token'
 require 'fireblocks/api/transactions'
 
-# Parent module for all classes
 module Fireblocks
-  class << self
-    def configure
-      yield(configuration)
-    end
+  def self.configure
+    yield(configuration)
+  end
 
-    def configuration
-      @configuration ||= Configuration.new
-    end
+  def self.configuration
+    @configuration ||= Configuration.new
+  end
 
-    def reset
-      @configuration = Configuration.new
-    end
+  def self.reload_configuration
+    @configuration = Configuration.new
   end
 end
