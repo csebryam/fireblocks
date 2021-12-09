@@ -1,0 +1,32 @@
+TransactionStatus:
+  SUBMITTED:
+  - 'The transaction was submitted to the Fireblocks system and is being processed'
+  QUEUED: 
+  - 'Transaction is queued. Pending for another transaction to be processed'
+  PENDING_SIGNATURE:
+  - 'The transaction is pending the initiator to sign the transaction'
+  BROADCASTING:
+  - 'The transaction is pending broadcast to the blockchain network'
+  PENDING_3RD_PARTY_MANUAL_APPROVAL:
+  - 'The transaction is pending manual approval as required by the 3rd party, usually an email approval'
+  PENDING_3RD_PARTY:
+  - 'The transaction is pending approval by the 3rd party service (e.g exchange)'
+  CONFIRMING:
+   - 'Pending confirmation on the blockchain'
+  PARTIALLY_COMPLETED:
+  - '(Only for Aggregated transactions) One or more of of the transaction records have completed successfully' 
+  PENDING_AML_SCREENING:
+   - 'In case the AML screening feature is enabled, transaction is pending AML screening result'
+  COMPLETED:
+  - 'Successfully completed'
+  CANCELLED:
+   - 'The transaction was cancelled or rejected by the user on the Fireblocks platform or by the 3rd party service from which the funds are withdrawn'
+  REJECTED:
+  - 'The transaction was rejected by the Fireblocks system or by the 3rd party service'
+  BLOCKED:
+  - 'The transaction was blocked due to a policy rule'
+  FAILED:
+  - 'The transaction has failed'
+
+
+
