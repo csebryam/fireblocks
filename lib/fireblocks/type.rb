@@ -1,9 +1,9 @@
-require 'refinements/camelize'
+require 'refinements/string'
 require 'smart_properties'
 
 module Fireblocks
   class Type
-    using Fireblocks::Refinements::Camelize
+    using Fireblocks::Refinements::String
     include SmartProperties
   end
 end
