@@ -9,11 +9,11 @@ Gem::Specification.new do |spec|
 
   spec.name          = 'fireblocks'
   spec.version       = Fireblocks::VERSION
-  spec.authors       = ['Bryam Noguera']
-  spec.email         = ['bryamnoguera@yahoo.com']
+  spec.authors       = ['Bryam Noguera', 'Matt Culpepper']
+  spec.email         = ['bryamnoguera@yahoo.com', 'matt@culpepper.co']
 
   spec.summary       = 'Ruby wrapper for Fireblocks API'
-  spec.homepage      = 'https://github.com/csebryam/fireblocks'
+  spec.homepage      = 'https://github.com/fundamerica/fireblocks'
   spec.license       = 'MIT'
 
   spec.require_paths = ['lib']
@@ -27,4 +27,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pry-byebug'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rubocop',  '~> 0.56'
+  spec.add_development_dependency 'figaro'
 end
