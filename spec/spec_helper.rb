@@ -17,6 +17,7 @@
 require 'bundler/setup'
 Bundler.setup
 
+require 'pry'
 require 'fireblocks'
 
 RSpec.configure do |config|

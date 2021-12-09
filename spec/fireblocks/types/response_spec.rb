@@ -1,9 +1,9 @@
 describe ::Fireblocks::Types::Response do
-  class FunkyType < ::Fireblocks::Types::Response
-    property :camelized_name
+  class Transaction < ::Fireblocks::Types::Response
+    property :transaction_hash, accepts: :camelize
   end
 
   context "when deserializing" do
-    expect(FunkyType.new(camelizedName: 'a value').camelized_name).to eq('a value')
+    expect(Transaction.new(transactionHash: 'a value').to_snake_hash).to match(a_hash_including(transaction_hash: 'a value'))
   end
 end
