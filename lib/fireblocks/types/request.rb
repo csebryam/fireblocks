@@ -1,6 +1,8 @@
+require 'awrence'
+
 module Fireblocks
-  class Types
-    module Request < Type
+  module Types
+    class Request < Type
       include Awrence::Methods
     end
   end

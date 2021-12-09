@@ -2,14 +2,27 @@ PATH
   remote: .
   specs:
     fireblocks (0.2.13)
+      awrence
       jwt
+      plissken
       smart_properties
 
 GEM
   remote: https://rubygems.org/
   specs:
+    awrence (1.2.1)
+    byebug (11.1.3)
+    coderay (1.1.3)
     diff-lcs (1.4.4)
     jwt (2.3.0)
+    method_source (1.0.0)
+    plissken (1.4.1)
+    pry (0.13.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-byebug (3.9.0)
+      byebug (~> 11.0)
+      pry (~> 0.13.0)
     rake (13.0.1)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
@@ -32,6 +45,7 @@ PLATFORMS
 DEPENDENCIES
   bundler
   fireblocks!
+  pry-byebug
   rake
   rspec
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Fireblocks
-  class API
+  module API
     class Transactions
       class << self
         EXTERNAL_WALLET = 'EXTERNAL_WALLET'

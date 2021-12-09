@@ -3,6 +3,8 @@
 require 'fireblocks/version'
 require 'fireblocks/configuration'
 require 'fireblocks/type'
+require 'fireblocks/types/response'
+require 'fireblocks/types/request'
 require 'fireblocks/types/vault/create_vault_asset_response'
 require 'fireblocks/api/api'
 require 'fireblocks/api/request'

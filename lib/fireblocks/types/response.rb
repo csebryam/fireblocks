@@ -1,6 +1,8 @@
+require 'plissken'
+
 module Fireblocks
-  class Types
-    module Response < Type
+  module Types
+    class Response < Type
       include Plissken::Methods
     end
   end
