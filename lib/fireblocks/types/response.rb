@@ -2,7 +2,7 @@ require 'plissken'
 
 module Fireblocks
   module Types
-    class Response < Type
+    class Response < Response
       include Plissken::Methods
 
       alias to_hash to_camel_keys
