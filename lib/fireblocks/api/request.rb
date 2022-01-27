@@ -55,7 +55,8 @@ module Fireblocks
       {
         'X-API-Key' => Fireblocks.configuration.api_key,
         'Authorization' => "Bearer #{token(body)}",
-        'Content-Type' => 'application/json'
+        'Content-Type' => 'application/json',
+        'Idempotency-Key' => SecureRandom.uuid
       }
     end
 
