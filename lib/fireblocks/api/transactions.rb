@@ -21,9 +21,9 @@ module Fireblocks
           cpuStaking
         ].freeze
 
-        def create(options)
+        def create(options, headers: {})
           body = options.slice(*VALID_TRANSACTION_KEYS)
-          Fireblocks::Request.post(body: body, path: '/v1/transactions')
+          Fireblocks::Request.post(body: body, path: '/v1/transactions', headers: headers)
         end
 
         def from_vault_to_external(
@@ -35,7 +35,8 @@ module Fireblocks
           destination_id: nil,
           one_time_address: nil,
           tag: nil,
-          options: {}
+          options: {},
+          headers: {}
         )
 
           destination_params = destination_payload(
@@ -56,7 +57,7 @@ module Fireblocks
             }
           }.merge(options, destination_params).compact
 
-          create(body)
+          create(body, headers)
         end
 
         def from_vault_to_vault(
@@ -64,7 +65,8 @@ module Fireblocks
           asset_id:,
           source_id:,
           destination_id:,
-          options: {}
+          options: {},
+          headers: {}
         )
 
           body = {
@@ -80,7 +82,7 @@ module Fireblocks
             }
           }.merge(options).compact
 
-          create(body)
+          create(body, headers)
         end
 
         def destination_payload(**kwargs)
