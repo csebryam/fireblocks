@@ -14,17 +14,17 @@ module Fireblocks
         new(path: path).put(body)
       end
 
-      def post(path:, body: {}, headers: {})
-        new(path: path).post(body, headers)
+      def post(path:, body: {})
+        new(path: path).post(body)
       end
     end
 
     attr_accessor :path, :uri, :idempotency_key
 
-    def initialize(path:)
+    def initialize(path:, headers: {})
       @path = path
       @uri = URI("#{Fireblocks.configuration.base_url}#{path}")
-      @idempotency_key = idempotency_key
+      @idempotency_key = headers['Idempotency-Key']
     end
 
     def get(body)
@@ -42,9 +42,9 @@ module Fireblocks
       valid_response!(send_request(req), request: req)
     end
 
-    def post(body, headers = {})
+    def post(body)
       req = Net::HTTP::Post.new(uri)
-      request_headers(body, headers).each { |rk, rv| req[rk] = rv }
+      request_headers(body).each { |rk, rv| req[rk] = rv }
       req.body = body.to_json
 
       valid_response!(send_request(req), request: req)
@@ -52,12 +52,12 @@ module Fireblocks
 
     private
 
-    def request_headers(body, headers = {})
+    def request_headers(body)
       {
         'X-API-Key' => Fireblocks.configuration.api_key,
         'Authorization' => "Bearer #{token(body)}",
         'Content-Type' => 'application/json',
-        'Idempotency-Key' => headers['Idempotency-Key']
+        'Idempotency-Key' => idempotency_key
         # 'Idempotency-Key' => onchain_transaction.idempotency_key
       }
     end
