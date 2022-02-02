@@ -21,9 +21,9 @@ module Fireblocks
           cpuStaking
         ].freeze
 
-        def create(options, headers: {})
+        def create(options, headers:)
           body = options.slice(*VALID_TRANSACTION_KEYS)
-          Fireblocks::Request.post(body: body, path: '/v1/transactions', headers: headers)
+          Fireblocks::Request.post(body: body, path: '/v1/transactions', headers: {})
         end
 
         def from_vault_to_external(
