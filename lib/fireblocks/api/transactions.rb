@@ -55,8 +55,9 @@ module Fireblocks
             source: {
               type: VAULT_ACCOUNT,
               id: source_id
-            }
-          }.merge(options, destination_params, headers).compact
+            },
+            headers: {}
+          }.merge(options, destination_params).compact
 
           create(body, headers)
         end
@@ -80,7 +81,8 @@ module Fireblocks
             destination: {
               type: VAULT_ACCOUNT,
               id: destination_id
-            }
+            },
+            headers: {}
           }.merge(options, headers).compact
 
           create(body, headers)
