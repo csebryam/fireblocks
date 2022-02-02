@@ -21,7 +21,7 @@ module Fireblocks
           cpuStaking
         ].freeze
 
-        def create(options, headers: {})
+        def create(options, headers = {})
           body = options.slice(*VALID_TRANSACTION_KEYS)
           Fireblocks::Request.post(body: body, path: '/v1/transactions', headers: {})
         end
@@ -57,7 +57,7 @@ module Fireblocks
               id: source_id
             },
             headers: {}
-          }.merge(options, destination_params).compact
+          }.merge(options, destination_params, headers:).compact
 
           create(body, headers)
         end
@@ -83,7 +83,7 @@ module Fireblocks
               id: destination_id
             },
             headers: {}
-          }.merge(options, headers).compact
+          }.merge(options, headers:).compact
 
           create(body, headers)
         end
