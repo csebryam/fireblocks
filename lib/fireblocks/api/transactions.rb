@@ -57,7 +57,7 @@ module Fireblocks
               id: source_id
             },
             headers: {}
-          }.merge(options, destination_params, headers).compact
+          }.merge(options, destination_params).compact
 
           create(body, headers)
         end
