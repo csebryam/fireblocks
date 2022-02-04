@@ -53,7 +53,7 @@ module Fireblocks
 
     private
 
-    def request_headers(body, headers)
+    def request_headers(body, headers = {})
       {
         'X-API-Key' => Fireblocks.configuration.api_key,
         'Authorization' => "Bearer #{token(body)}",
