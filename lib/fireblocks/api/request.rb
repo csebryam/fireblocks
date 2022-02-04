@@ -85,7 +85,7 @@ module Fireblocks
         request_body: request.body
       }
 
-      raise Error, err_details
+      raise Error.new(err_details)
     end
 
     class Error < StandardError
