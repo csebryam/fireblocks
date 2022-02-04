@@ -14,7 +14,7 @@ module Fireblocks
         new(path: path).put(body)
       end
 
-      def post(path:, body: {}, headers:)
+      def post(path:, body: {}, headers: nil)
         new(path: path).post(body, headers)
       end
     end
@@ -41,7 +41,7 @@ module Fireblocks
       valid_response!(send_request(req), request: req)
     end
 
-    def post(body, idempotency_key:)
+    def post(body, idempotency_key: nil)
       @idempotency_key = idempotency_key
       req = Net::HTTP::Post.new(uri)
       request_headers(body, idempotency_key).each { |rk, rv| req[rk] = rv }
@@ -54,7 +54,7 @@ module Fireblocks
 
     private
 
-    def request_headers(body, idempotency_key:)
+    def request_headers(body, idempotency_key: nil)
     # def request_headers(body)
       {
         'X-API-Key' => Fireblocks.configuration.api_key,
