@@ -82,8 +82,7 @@ module Fireblocks
         response_body: req_response.body,
         method: request.method,
         path: request.path,
-        request_body: request.body,
-        idempotency_key: request.idempotency_key
+        request_body: request.body
       }
 
       raise Error, err_details
