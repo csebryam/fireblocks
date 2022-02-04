@@ -14,17 +14,16 @@ module Fireblocks
         new(path: path).put(body)
       end
 
-      def post(path:, body: {}, headers: {})
+      def post(path:, body: {}, headers: nil)
         new(path: path).post(body, headers)
       end
     end
 
     attr_accessor :path, :uri, :idempotency_key
 
-    def initialize(path:, headers: {})
+    def initialize(path:)
       @path = path
       @uri = URI("#{Fireblocks.configuration.base_url}#{path}")
-      @idempotency_key = headers['Idempotency-Key']
     end
 
     def get(body)
@@ -86,7 +85,8 @@ module Fireblocks
         response_body: req_response.body,
         method: request.method,
         path: request.path,
-        request_body: request.body
+        request_body: request.body,
+        idempotency_key: request.idempotency_key
       }
 
       raise Error.new(err_details)
