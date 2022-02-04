@@ -14,7 +14,7 @@ module Fireblocks
         new(path: path).put(body)
       end
 
-      def post(path:, body: {}, headers: nil)
+      def post(path:, body: {}, headers: {})
         new(path: path).post(body, headers)
       end
     end
@@ -41,12 +41,11 @@ module Fireblocks
       valid_response!(send_request(req), request: req)
     end
 
-    def post(body, idempotency_key: nil)
-      @idempotency_key = idempotency_key
+    def post(body, headers)
       req = Net::HTTP::Post.new(uri)
-      request_headers(body, idempotency_key).each { |rk, rv| req[rk] = rv }
-      # request_headers(body, headers).each { |rk, rv| req[rk] = rv }
+      request_headers(body, headers).each { |rk, rv| req[rk] = rv }
       req['Idempotency-Key'] = idempotency_key if idempotency_key
+      @idempotency_key = idempotency_key
       req.body = body.to_json
 
       valid_response!(send_request(req), request: req)
@@ -54,14 +53,12 @@ module Fireblocks
 
     private
 
-    def request_headers(body, idempotency_key: nil)
-    # def request_headers(body)
+    def request_headers(body, headers)
       {
         'X-API-Key' => Fireblocks.configuration.api_key,
         'Authorization' => "Bearer #{token(body)}",
         'Content-Type' => 'application/json',
-        'Idempotency-Key' => idempotency_key
-        # 'Idempotency-Key' => onchain_transaction.idempotency_key
+        'Idempotency-Key' => headers['Idempotency-Key']
       }
     end
 
@@ -89,7 +86,7 @@ module Fireblocks
         idempotency_key: request.idempotency_key
       }
 
-      raise Error.new(err_details)
+      raise Error, err_details
     end
 
     class Error < StandardError
