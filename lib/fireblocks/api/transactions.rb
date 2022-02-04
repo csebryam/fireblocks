@@ -46,7 +46,8 @@ module Fireblocks
             destinations: destinations,
             destination_id: destination_id,
             one_time_address: one_time_address,
-            tag: tag
+            tag: tag,
+            headers: {}
           )
 
           body = {
