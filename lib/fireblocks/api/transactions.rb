@@ -56,7 +56,7 @@ module Fireblocks
               type: VAULT_ACCOUNT,
               id: source_id
             }
-          }.merge(options, destination_params, headers).compact
+          }.merge(options, destination_params).compact
 
           create(body, headers)
         end
