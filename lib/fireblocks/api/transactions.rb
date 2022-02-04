@@ -22,7 +22,7 @@ module Fireblocks
           headers
         ].freeze
 
-        def create(options, headers: {})
+        def create(options, headers: nil)
           body = options.slice(*VALID_TRANSACTION_KEYS)
           Fireblocks::Request.post(body: body, path: '/v1/transactions', headers: headers)
         end
@@ -37,7 +37,7 @@ module Fireblocks
           one_time_address: nil,
           tag: nil,
           options: {},
-          headers: {}
+          headers: nil
         )
 
           destination_params = destination_payload(
@@ -47,7 +47,7 @@ module Fireblocks
             destination_id: destination_id,
             one_time_address: one_time_address,
             tag: tag,
-            headers: {}
+            headers: headers
           )
 
           body = {
