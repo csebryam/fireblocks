@@ -24,7 +24,7 @@ module Fireblocks
 
         def create(options, headers)
           body = options.slice(*VALID_TRANSACTION_KEYS)
-          Fireblocks::Request.post(body: body, path: '/v1/transactions', headers: idempotency_key)
+          Fireblocks::Request.post(body: body, path: '/v1/transactions', headers: nil)
         end
 
         def from_vault_to_external(
@@ -37,7 +37,7 @@ module Fireblocks
           one_time_address: nil,
           tag: nil,
           options: {},
-          headers:
+          headers: nil
         )
 
           destination_params = destination_payload(
@@ -46,8 +46,7 @@ module Fireblocks
             destinations: destinations,
             destination_id: destination_id,
             one_time_address: one_time_address,
-            tag: tag,
-            headers: {}
+            tag: tag
           )
 
           body = {
@@ -56,8 +55,7 @@ module Fireblocks
             source: {
               type: VAULT_ACCOUNT,
               id: source_id
-            },
-            headers: {}
+            }
           }.merge(options, destination_params).compact
 
           create(body, headers)
