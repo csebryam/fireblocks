@@ -46,8 +46,7 @@ module Fireblocks
             destinations: destinations,
             destination_id: destination_id,
             one_time_address: one_time_address,
-            tag: tag,
-            headers: {}
+            tag: tag
           )
 
           body = {
@@ -56,7 +55,8 @@ module Fireblocks
             source: {
               type: VAULT_ACCOUNT,
               id: source_id
-            }
+            },
+            headers: {}
           }.merge(options, destination_params).compact
 
           create(body, headers)
