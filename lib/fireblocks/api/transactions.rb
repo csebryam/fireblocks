@@ -58,7 +58,7 @@ module Fireblocks
             }
           }.merge(options, destination_params).compact
 
-          create(body, headers)
+          create(body, headers: {})
         end
 
         def from_vault_to_vault(
@@ -83,7 +83,7 @@ module Fireblocks
             }
           }.merge(options).compact
 
-          create(body, headers)
+          create(body, headers: {})
         end
 
         def destination_payload(**kwargs)
