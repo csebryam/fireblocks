@@ -44,8 +44,6 @@ module Fireblocks
     def post(body, headers)
       req = Net::HTTP::Post.new(uri)
       request_headers(body, headers).each { |rk, rv| req[rk] = rv }
-      req['Idempotency-Key'] = idempotency_key if idempotency_key
-      @idempotency_key = idempotency_key
       req.body = body.to_json
 
       valid_response!(send_request(req), request: req)
