@@ -41,7 +41,7 @@ module Fireblocks
       valid_response!(send_request(req), request: req)
     end
 
-    def post(body, headers)
+    def post(body, headers: {})
       req = Net::HTTP::Post.new(uri)
       request_headers(body, headers).each { |rk, rv| req[rk] = rv }
       req.body = body.to_json
@@ -51,7 +51,7 @@ module Fireblocks
 
     private
 
-    def request_headers(body, headers = {})
+    def request_headers(body, headers: {})
       {
         'X-API-Key' => Fireblocks.configuration.api_key,
         'Authorization' => "Bearer #{token(body)}",
