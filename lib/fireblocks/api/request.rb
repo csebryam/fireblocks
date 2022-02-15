@@ -19,7 +19,7 @@ module Fireblocks
       end
     end
 
-    attr_accessor :path, :uri, :idempotency_key
+    attr_accessor :path, :uri
 
     def initialize(path:)
       @path = path
