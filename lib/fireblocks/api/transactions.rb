@@ -9,16 +9,17 @@ module Fireblocks
         VALID_TRANSACTION_KEYS = %i[
           amount
           assetId
-          source
+          autoStaking
+          cpuStaking
           destination
           destinations
           fee
           feeLevel
           gasPrice
-          note
-          autoStaking
           networkStaking
-          cpuStaking
+          note
+          source
+          treatAsGrossAmount
         ].freeze
 
         def create(options)
