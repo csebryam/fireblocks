@@ -7,7 +7,7 @@ module Fireblocks
   #
   class Configuration
     Error = Class.new(StandardError)
-    attr_writer :api_key, :private_key
+    attr_writer :api_key, :private_key, :read_timeout_value
 
     attr_accessor :base_url, :tenant_id
 
@@ -16,6 +16,7 @@ module Fireblocks
       @private_key = nil
       @tenant_id = nil
       @base_url = 'https://api.fireblocks.io'
+      @read_timeout_value = nil
     end
 
     def api_key
