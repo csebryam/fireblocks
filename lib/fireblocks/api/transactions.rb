@@ -19,6 +19,7 @@ module Fireblocks
           networkStaking
           note
           source
+          treatAsGrossAmount
           headers
         ].freeze
 
