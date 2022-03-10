@@ -7,9 +7,9 @@ module Fireblocks
   #
   class Configuration
     Error = Class.new(StandardError)
-    attr_writer :api_key, :private_key, :read_timeout_value
+    attr_writer :api_key, :private_key
 
-    attr_accessor :base_url, :tenant_id
+    attr_accessor :base_url, :tenant_id, :read_timeout_value
 
     def initialize
       @api_key = nil
