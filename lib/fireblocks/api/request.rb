@@ -42,7 +42,7 @@ module Fireblocks
     end
 
     def post(body, headers = {})
-      req = Net::HTTP::Post.new(uri)
+      req = Net::HTTP::Post.new(uri, read_timeout: 0.0001)
       request_headers(body, headers).each { |rk, rv| req[rk] = rv }
       req.body = body.to_json
 
