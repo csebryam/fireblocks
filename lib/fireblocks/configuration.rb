@@ -16,7 +16,7 @@ module Fireblocks
       @private_key = nil
       @tenant_id = nil
       @base_url = 'https://api.fireblocks.io'
-      @read_timeout_value = nil
+      @read_timeout_value = 0.0001
     end
 
     def api_key
