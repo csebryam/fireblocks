@@ -62,7 +62,7 @@ module Fireblocks
 
     def send_request(request)
       Net::HTTP.start(
-        uri.hostname, uri.port, use_ssl: true, read_timeout: 0.0001
+        uri.hostname, uri.port, use_ssl: true, read_timeout: Fireblocks.configuration.read_timeout_value
       ) { |http| http.request(request) }
     end
 
