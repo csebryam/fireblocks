@@ -65,7 +65,8 @@ module Fireblocks
         uri.hostname, uri.port, use_ssl: true, read_timeout: Fireblocks.configuration.read_timeout_value
       ) do |http|
         http.max_retries = 0
-        http.read_timeout = 0.007
+        http.read_timeout = Fireblocks.configuration.read_timeout_value
+        # http.read_timeout = 0.007
         http.request(request)
       end
     end
