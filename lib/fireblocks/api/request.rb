@@ -42,11 +42,15 @@ module Fireblocks
     end
 
     def post(body, headers = {})
+      http = Net::HTTP.new(uri.hostname, uri.port)
+      http.read_timeout = Fireblocks.configuration.read_timeout_value
+      http.open_timeout = Fireblocks.configuration.read_timeout_value
       req = Net::HTTP::Post.new(uri)
       request_headers(body, headers).each { |rk, rv| req[rk] = rv }
       req.body = body.to_json
+      http.request(req)
 
-      valid_response!(send_request(req), request: req)
+      # valid_response!(send_request(req), request: req)
     end
 
     private
