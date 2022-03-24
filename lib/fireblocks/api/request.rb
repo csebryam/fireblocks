@@ -42,15 +42,11 @@ module Fireblocks
     end
 
     def post(body, headers = {})
-      http = Net::HTTP.new(uri.hostname, uri.port)
-      http.read_timeout = Fireblocks.configuration.read_timeout_value
-      http.open_timeout = Fireblocks.configuration.read_timeout_value
       req = Net::HTTP::Post.new(uri)
       request_headers(body, headers).each { |rk, rv| req[rk] = rv }
       req.body = body.to_json
-      http.request(req)
 
-      # valid_response!(send_request(req), request: req)
+      valid_response!(send_request(req), request: req)
     end
 
     private
@@ -65,14 +61,7 @@ module Fireblocks
     end
 
     def send_request(request)
-      Net::HTTP.start(
-        uri.hostname, uri.port, use_ssl: true, read_timeout: Fireblocks.configuration.read_timeout_value
-      ) do |http|
-        http.max_retries = 0
-        http.read_timeout = Fireblocks.configuration.read_timeout_value
-        # http.read_timeout = 0.007
-        http.request(request)
-      end
+      Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(request) }
     end
 
     def token(body)
