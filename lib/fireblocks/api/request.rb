@@ -61,7 +61,9 @@ module Fireblocks
     end
 
     def send_request(request)
-      Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(request) }
+      Net::HTTP.start(
+          uri.hostname, uri.port, use_ssl: true
+      ) { |http| http.request(request) }
     end
 
     def token(body)
