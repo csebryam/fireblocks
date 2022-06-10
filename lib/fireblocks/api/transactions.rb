@@ -84,7 +84,7 @@ module Fireblocks
             }
           }.merge(options).compact
 
-          create(body, headers: {})
+          create(body, headers: headers)
         end
 
         def destination_payload(**kwargs)
