@@ -13,8 +13,10 @@ gem install fireblocks
 Add to your `Gemfile`:
 
 ```ruby
-gem "fireblocks", "~> 0.2.3"
+gem "fireblocks", "~> 0.3.0"
 ```
+
+Check [version file](https://github.com/fundamerica/fireblocks/blob/86cf22bdda88450892d151b13e10c7d397b1e034/lib/fireblocks/version.rb) for most current.
 
 Run `bundle install`
 
