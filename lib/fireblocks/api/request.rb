@@ -5,6 +5,9 @@ require 'net/http'
 module Fireblocks
   # Interface to GET, POST, PUT
   class Request
+    CURRENT = 'CURRENT_WORKSPACE'
+    OLD = 'OLD_WORKSPACE'
+
     class << self
       def get(path:, body: '')
         new(path: path).get(body)
@@ -14,16 +17,17 @@ module Fireblocks
         new(path: path).put(body)
       end
 
-      def post(path:, body: {}, headers: {})
-        new(path: path).post(body, headers)
+      def post(path:, body: {}, headers: {}, workspace: CURRENT)
+        new(path: path, workspace: workspace).post(body, headers)
       end
     end
 
-    attr_accessor :path, :uri
+    attr_accessor :path, :uri, :workspace
 
-    def initialize(path:)
+    def initialize(path:, workspace: CURRENT)
       @path = path
       @uri = URI("#{Fireblocks.configuration.base_url}#{path}")
+      @workspace = workspace
     end
 
     def get(body)
@@ -53,7 +57,7 @@ module Fireblocks
 
     def request_headers(body, headers = {})
       {
-        'X-API-Key' => Fireblocks.configuration.api_key,
+        'X-API-Key' => api_key,
         'Authorization' => "Bearer #{token(body)}",
         'Content-Type' => 'application/json',
         'Idempotency-Key' => headers['Idempotency-Key']
@@ -66,8 +70,20 @@ module Fireblocks
       ) { |http| http.request(request) }
     end
 
+    def api_key
+      workspace == CURRENT ? current_workspace_api_key : old_workspace_api_key
+    end
+
+    def current_workspace_api_key
+      Fireblocks.configuration.api_key
+    end
+
+    def old_workspace_api_key
+      Fireblocks.configuration.api_key_old_primetrust
+    end
+
     def token(body)
-      Token.call(body, uri)
+      Token.call(body, uri, workspace: workspace)
     end
 
     def valid_response!(req_response, request:)
@@ -83,7 +99,7 @@ module Fireblocks
         request_body: request.body
       }
 
-      raise Error.new(err_details)
+      raise Error, err_details
     end
 
     class Error < StandardError
