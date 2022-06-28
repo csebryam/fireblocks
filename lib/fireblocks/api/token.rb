@@ -7,17 +7,21 @@ require 'openssl'
 module Fireblocks
   # This class will issue a new Fireblocks token
   class Token
+    CURRENT = 'CURRENT_WORKSPACE'
+    OLD = 'OLD_WORKSPACE'
+
     class << self
-      def call(body, uri)
-        new(body, uri).call
+      def call(body, uri, workspace: CURRENT)
+        new(body, uri, workspace).call
       end
     end
 
-    attr_accessor :body, :uri
+    attr_accessor :body, :uri, :workspace
 
-    def initialize(body, uri)
+    def initialize(body, uri, workspace)
       @body = body
       @uri = uri
+      @workspace = workspace
     end
 
     def created_at
@@ -46,7 +50,7 @@ module Fireblocks
         nonce: nonce,
         iat: created_at,
         exp: expire_at,
-        sub: Fireblocks.configuration.api_key,
+        sub: api_key,
         bodyHash: body_hash
       }
     end
@@ -56,7 +60,31 @@ module Fireblocks
     end
 
     def rsa_private
-      OpenSSL::PKey::RSA.new(Fireblocks.configuration.private_key)
+      OpenSSL::PKey::RSA.new(private_key)
+    end
+
+    def api_key
+      workspace == CURRENT ? current_workspace_api_key : old_workspace_api_key
+    end
+
+    def current_workspace_api_key
+      Fireblocks.configuration.api_key
+    end
+
+    def old_workspace_api_key
+      Fireblocks.configuration.api_key_old_primetrust
+    end
+
+    def private_key
+      workspace == CURRENT ? current_workspace_private_key : old_workspace_private_key
+    end
+
+    def current_workspace_private_key
+      Fireblocks.configuration.private_key
+    end
+
+    def old_workspace_private_key
+      Fireblocks.configuration.private_key_old_primetrust
     end
   end
 end
