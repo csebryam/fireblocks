@@ -5,7 +5,7 @@ module Fireblocks
   class API
     class << self
       def get_vault_accounts
-        Request.get(path: '/v1/vault/accounts')
+        Request.get(path: '/v1/vault/accounts_paged')
       end
 
       def create_vault_account(name:)

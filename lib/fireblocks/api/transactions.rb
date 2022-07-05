@@ -12,12 +12,18 @@ module Fireblocks
             :note,
             :autoStaking,
             :networkStaking,
-            :cpuStaking
+            :cpuStaking,
+            :operation,
+            :extraParameters
         ]
 
         def create(options)
           body = options.slice(*VALID_TRANSACTION_KEYS)
           Fireblocks::Request.post(body: body, path: '/v1/transactions')
+        end
+
+        def get(id)
+          Request.get(path: "/v1/transactions/#{id}")
         end
 
         def from_vault_to_external(
