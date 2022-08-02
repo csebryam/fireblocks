@@ -21,6 +21,7 @@ module Fireblocks
           source
           treatAsGrossAmount
           headers
+          forceSweep
         ].freeze
 
         def create(options, headers = {})
