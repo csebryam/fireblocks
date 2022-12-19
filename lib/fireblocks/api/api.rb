@@ -23,6 +23,12 @@ module Fireblocks
         )
       end
 
+      def get_public_key_info_for_vault_account(vault_account_id, asset_id, change: 0, address_index: 0, compressed: true)
+        Request.get(
+          path: "/v1/vault/accounts/#{vault_account_id}/#{asset_id}/0/0/public_key_info?compressed=#{compressed}"
+        )
+      end
+
       def get_vault_account_asset(vault_account_id, asset_id)
         Request.get(path: "/v1/vault/accounts/#{vault_account_id}/#{asset_id}")
       end
