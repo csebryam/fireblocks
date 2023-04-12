@@ -8,16 +8,17 @@ module Fireblocks
   # This class will issue a new Fireblocks token
   class Token
     class << self
-      def call(body, uri)
-        new(body, uri).call
+      def call(body, uri, config)
+        new(body, uri, config).call
       end
     end
 
     attr_accessor :body, :uri
 
-    def initialize(body, uri)
+    def initialize(body, uri, config)
       @body = body
       @uri = uri
+      @config = config
     end
 
     def created_at
@@ -46,7 +47,7 @@ module Fireblocks
         nonce: nonce,
         iat: created_at,
         exp: expire_at,
-        sub: Fireblocks.configuration.api_key,
+        sub: @config.api_key,
         bodyHash: body_hash
       }
     end
@@ -56,7 +57,7 @@ module Fireblocks
     end
 
     def rsa_private
-      OpenSSL::PKey::RSA.new(Fireblocks.configuration.private_key)
+      OpenSSL::PKey::RSA.new(@config.private_key)
     end
   end
 end

@@ -17,13 +17,13 @@ module Fireblocks
             :extraParameters
         ]
 
-        def create(options)
+        def create(options, config = nil)
           body = options.slice(*VALID_TRANSACTION_KEYS)
-          Fireblocks::Request.post(body: body, path: '/v1/transactions')
+          Fireblocks::Request.post(body: body, path: '/v1/transactions', config: config)
         end
 
-        def get(id)
-          Request.get(path: "/v1/transactions/#{id}")
+        def get(id, config = nil)
+          Request.get(path: "/v1/transactions/#{id}", config: config)
         end
 
         def from_vault_to_external(
